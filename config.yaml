@@ -1,0 +1,187 @@
+# Claude Code Documentation Scraper Configuration
+
+# Base URL for Claude Code documentation
+base_url: "https://docs.anthropic.com/en/docs/claude-code"
+
+# Documentation sections to scrape
+# Each section corresponds to a sub-page of the Claude Code docs
+sections:
+  - name: "overview"
+    url_suffix: ""
+    filename: "overview.md"
+    description: "General Claude Code overview and introduction"
+    
+  - name: "quickstart"
+    url_suffix: "/quickstart"
+    filename: "quickstart.md"
+    description: "Getting started guide and basic usage"
+    
+  - name: "memory"
+    url_suffix: "/memory"
+    filename: "memory.md"
+    description: "Memory management and CLAUDE.md functionality"
+    
+  - name: "common-workflows"
+    url_suffix: "/common-workflows"
+    filename: "common-workflows.md"
+    description: "Extended thinking, pasting images, --resume workflows"
+    
+  - name: "ide-integrations"
+    url_suffix: "/ide-integrations"
+    filename: "ide-integrations.md"
+    description: "IDE integration guides and setup"
+    
+  - name: "mcp"
+    url_suffix: "/mcp"
+    filename: "mcp.md"
+    description: "Model Context Protocol integration"
+    
+  - name: "github-actions"
+    url_suffix: "/github-actions"
+    filename: "github-actions.md"
+    description: "GitHub Actions integration and CI/CD"
+    
+  - name: "sdk"
+    url_suffix: "/sdk"
+    filename: "sdk.md"
+    description: "Software Development Kit documentation"
+    
+  - name: "troubleshooting"
+    url_suffix: "/troubleshooting"
+    filename: "troubleshooting.md"
+    description: "Common issues and troubleshooting solutions"
+    
+  - name: "third-party-integrations"
+    url_suffix: "/third-party-integrations"
+    filename: "third-party-integrations.md"
+    description: "Third-party tools and integrations"
+    
+  - name: "amazon-bedrock"
+    url_suffix: "/amazon-bedrock"
+    filename: "amazon-bedrock.md"
+    description: "AWS Bedrock integration guide"
+    
+  - name: "google-vertex-ai"
+    url_suffix: "/google-vertex-ai"
+    filename: "google-vertex-ai.md"
+    description: "Google Vertex AI integration guide"
+    
+  - name: "corporate-proxy"
+    url_suffix: "/corporate-proxy"
+    filename: "corporate-proxy.md"
+    description: "Corporate proxy configuration"
+    
+  - name: "llm-gateway"
+    url_suffix: "/llm-gateway"
+    filename: "llm-gateway.md"
+    description: "LLM Gateway setup and configuration"
+    
+  - name: "devcontainer"
+    url_suffix: "/devcontainer"
+    filename: "devcontainer.md"
+    description: "Development container setup"
+    
+  - name: "iam"
+    url_suffix: "/iam"
+    filename: "iam.md"
+    description: "Authentication, permissions, and IAM"
+    
+  - name: "security"
+    url_suffix: "/security"
+    filename: "security.md"
+    description: "Security considerations and best practices"
+    
+  - name: "monitoring-usage"
+    url_suffix: "/monitoring-usage"
+    filename: "monitoring-usage.md"
+    description: "OpenTelemetry monitoring and usage tracking"
+    
+  - name: "costs"
+    url_suffix: "/costs"
+    filename: "costs.md"
+    description: "Cost management and optimization"
+    
+  - name: "cli-reference"
+    url_suffix: "/cli-reference"
+    filename: "cli-reference.md"
+    description: "Command line interface reference"
+    
+  - name: "interactive-mode"
+    url_suffix: "/interactive-mode"
+    filename: "interactive-mode.md"
+    description: "Keyboard shortcuts and interactive features"
+    
+  - name: "slash-commands"
+    url_suffix: "/slash-commands"
+    filename: "slash-commands.md"
+    description: "Slash command reference and usage"
+    
+  - name: "settings"
+    url_suffix: "/settings"
+    filename: "settings.md"
+    description: "Settings JSON files and environment variables"
+    
+  - name: "hooks"
+    url_suffix: "/hooks"
+    filename: "hooks.md"
+    description: "Hook system configuration and usage"
+
+# Scraping configuration
+scraping:
+  # Request settings
+  timeout: 30
+  retries: 3
+  delay_between_requests: 1.0
+  
+  # User agent for requests
+  user_agent: "Claude Code Documentation Scraper 1.0"
+  
+  # HTML processing
+  remove_elements:
+    - "nav"
+    - "footer" 
+    - ".navigation"
+    - ".sidebar"
+    - "#sidebar"
+    - ".header"
+    - "#header"
+    - ".breadcrumb"
+    - ".toc"
+    - ".table-of-contents"
+    - "script"
+    - "style"
+  
+  # Content selectors (try in order)
+  content_selectors:
+    - "main"
+    - ".content"
+    - "#content"
+    - ".main-content"
+    - "article"
+    - ".documentation"
+    - "body"
+
+# Output configuration
+output:
+  # Markdown conversion settings
+  markdown:
+    strip_whitespace: true
+    convert_code_blocks: true
+    preserve_links: true
+    wrap_width: 0  # No wrapping
+    
+  # File organization
+  docs_folder: "docs"
+  index_file: "index.md"
+  
+  # Metadata
+  add_timestamp: true
+  add_source_url: true
+  add_section_headers: true
+
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "scraper.log"
+  console: true

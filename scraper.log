@@ -1,0 +1,45 @@
+2025-08-18 13:42:21,353 - __main__ - INFO - Starting scrape of 1 sections
+2025-08-18 13:42:21,353 - __main__ - INFO - Processing section 1/1: hooks
+2025-08-18 13:42:21,353 - __main__ - INFO - Scraping section: hooks
+2025-08-18 13:42:21,353 - __main__ - DEBUG - Requesting https://docs.anthropic.com/en/docs/claude-code/hooks (attempt 1/4)
+2025-08-18 13:42:21,355 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): docs.anthropic.com:443
+2025-08-18 13:42:21,415 - urllib3.connectionpool - DEBUG - https://docs.anthropic.com:443 "GET /en/docs/claude-code/hooks HTTP/1.1" 200 None
+2025-08-18 13:42:21,603 - __main__ - DEBUG - Found content using selector: main
+2025-08-18 13:42:21,617 - __main__ - ERROR - Failed to convert to markdown for section hooks: You may specify either tags to strip or tags to convert, but not both.
+2025-08-18 13:42:21,618 - __main__ - INFO - === Scraping Statistics ===
+2025-08-18 13:42:21,618 - __main__ - INFO - Total sections: 1
+2025-08-18 13:42:21,618 - __main__ - INFO - Successful: 0
+2025-08-18 13:42:21,618 - __main__ - INFO - Failed: 1
+2025-08-18 13:42:21,618 - __main__ - INFO - Success rate: 0.0%
+2025-08-18 13:42:21,618 - __main__ - INFO - Duration: 0:00:00.265107
+2025-08-18 13:42:21,618 - __main__ - INFO - ========================
+2025-08-18 13:42:39,717 - __main__ - INFO - Starting scrape of 1 sections
+2025-08-18 13:42:39,717 - __main__ - INFO - Processing section 1/1: hooks
+2025-08-18 13:42:39,717 - __main__ - INFO - Scraping section: hooks
+2025-08-18 13:42:39,717 - __main__ - DEBUG - Requesting https://docs.anthropic.com/en/docs/claude-code/hooks (attempt 1/4)
+2025-08-18 13:42:39,719 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): docs.anthropic.com:443
+2025-08-18 13:42:39,785 - urllib3.connectionpool - DEBUG - https://docs.anthropic.com:443 "GET /en/docs/claude-code/hooks HTTP/1.1" 200 None
+2025-08-18 13:42:39,956 - __main__ - DEBUG - Found content using selector: main
+2025-08-18 13:42:40,000 - __main__ - ERROR - Failed to convert to markdown for section hooks: argument of type 'bool' is not iterable
+2025-08-18 13:42:40,000 - __main__ - INFO - === Scraping Statistics ===
+2025-08-18 13:42:40,001 - __main__ - INFO - Total sections: 1
+2025-08-18 13:42:40,001 - __main__ - INFO - Successful: 0
+2025-08-18 13:42:40,001 - __main__ - INFO - Failed: 1
+2025-08-18 13:42:40,001 - __main__ - INFO - Success rate: 0.0%
+2025-08-18 13:42:40,001 - __main__ - INFO - Duration: 0:00:00.283446
+2025-08-18 13:42:40,001 - __main__ - INFO - ========================
+2025-08-18 13:42:52,629 - __main__ - INFO - Starting scrape of 1 sections
+2025-08-18 13:42:52,629 - __main__ - INFO - Processing section 1/1: hooks
+2025-08-18 13:42:52,629 - __main__ - INFO - Scraping section: hooks
+2025-08-18 13:42:52,629 - __main__ - DEBUG - Requesting https://docs.anthropic.com/en/docs/claude-code/hooks (attempt 1/4)
+2025-08-18 13:42:52,631 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): docs.anthropic.com:443
+2025-08-18 13:42:52,670 - urllib3.connectionpool - DEBUG - https://docs.anthropic.com:443 "GET /en/docs/claude-code/hooks HTTP/1.1" 200 None
+2025-08-18 13:42:52,835 - __main__ - DEBUG - Found content using selector: main
+2025-08-18 13:42:52,903 - __main__ - INFO - Successfully saved: docs\hooks.md
+2025-08-18 13:42:52,903 - __main__ - INFO - === Scraping Statistics ===
+2025-08-18 13:42:52,903 - __main__ - INFO - Total sections: 1
+2025-08-18 13:42:52,903 - __main__ - INFO - Successful: 1
+2025-08-18 13:42:52,903 - __main__ - INFO - Failed: 0
+2025-08-18 13:42:52,903 - __main__ - INFO - Success rate: 100.0%
+2025-08-18 13:42:52,903 - __main__ - INFO - Duration: 0:00:00.274369
+2025-08-18 13:42:52,903 - __main__ - INFO - ========================

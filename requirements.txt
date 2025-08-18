@@ -1,0 +1,23 @@
+# Web scraping and HTML processing
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Markdown processing
+markdownify>=0.11.6
+html2text>=2020.1.16
+
+# YAML configuration
+PyYAML>=6.0.1
+
+# URL handling and validation
+urllib3>=2.0.0
+
+# Logging and utilities
+colorlog>=6.7.0
+
+# Data processing
+pandas>=1.5.0
+
+# Optional: Progress bars for long operations
+tqdm>=4.65.0
