@@ -26,6 +26,9 @@ jobs:
   update-documentation:
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: write
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -56,15 +59,26 @@ jobs:
           python scripts/scrape_docs.py --verbose
         fi
     
+    - name: Generate CLAUDE.md section
+      run: |
+        echo "Generating CLAUDE.md section with current documentation files"
+        python scripts/generate_claude_md_section.py --output-file claude_md_section.txt
+    
     - name: Check for changes
       id: check_changes
       run: |
-        if git diff --quiet docs/; then
-          echo "No changes detected"
-          echo "changes=false" >> $GITHUB_OUTPUT
+        # Check if there are any changes in the docs directory
+        if [ -d "docs" ] && [ "$(ls -A docs)" ]; then
+          if git diff --quiet docs/ 2>/dev/null || [ -n "$(git ls-files --others --exclude-standard docs/)" ]; then
+            echo "Changes detected in docs"
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes detected"
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
         else
-          echo "Changes detected"
-          echo "changes=true" >> $GITHUB_OUTPUT
+          echo "No docs directory or it's empty"
+          echo "changes=false" >> $GITHUB_OUTPUT
         fi
     
     - name: Commit and push changes
@@ -76,6 +90,11 @@ jobs:
         # Add all changes in docs folder
         git add docs/
         
+        # Also add claude_md_section.txt if it exists
+        if [ -f "claude_md_section.txt" ]; then
+          git add claude_md_section.txt
+        fi
+        
         # Create commit message
         if [ -n "${{ github.event.inputs.section }}" ]; then
           COMMIT_MSG="Update documentation for section: ${{ github.event.inputs.section }}"
@@ -83,11 +102,15 @@ jobs:
           COMMIT_MSG="Update Claude Code documentation - $(date +'%Y-%m-%d %H:%M UTC')"
         fi
         
-        # Commit changes
-        git commit -m "$COMMIT_MSG"
-        
-        # Push changes
-        git push
+        # Commit changes (only if there are staged changes)
+        if ! git diff --cached --quiet; then
+          git commit -m "$COMMIT_MSG"
+          
+          # Push changes
+          git push
+        else
+          echo "No staged changes to commit"
+        fi
     
     - name: Upload scraper logs
       if: always()
@@ -106,10 +129,14 @@ jobs:
         if [ "${{ steps.check_changes.outputs.changes }}" == "true" ]; then
           echo "✅ Documentation updated successfully" >> $GITHUB_STEP_SUMMARY
           
-          # Show which files were changed
+          # Show which files were changed (only if there's a previous commit)
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Files Updated:" >> $GITHUB_STEP_SUMMARY
-          git diff --name-only HEAD~1 docs/ | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
+          if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
+            git diff --name-only HEAD~1 docs/ 2>/dev/null | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY || echo "Unable to determine changed files" >> $GITHUB_STEP_SUMMARY
+          else
+            git ls-files docs/ | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
+          fi
         else
           echo "ℹ️ No changes detected - documentation is up to date" >> $GITHUB_STEP_SUMMARY
         fi
